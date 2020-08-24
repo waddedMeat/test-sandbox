@@ -1,0 +1,30 @@
+<phpunit
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/7.4/phpunit.xsd"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        bootstrap="test/bootstrap.php"
+        verbose="false">
+
+    <php>
+        <env name="APP_DB_NAME" value="test_png" force="true"/>
+    </php>
+
+    <testsuites>
+        <testsuite name="api">
+            <directory>./test/api</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./api/src</directory>
+        </whitelist>
+    </filter>
+
+    <logging>
+        <log type="coverage-html" target="./coverage" />
+    </logging>
+
+</phpunit>

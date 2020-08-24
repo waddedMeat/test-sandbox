@@ -16,6 +16,10 @@ services:
       - ${PHP_INI-./config/php/php.ini}:/usr/local/etc/php/php.ini
       - ${VHOSTS_DIR-./config/vhosts}:/etc/apache2/sites-enabled
       - ${LOG_DIR-./logs/apache2}:/var/log/apache2
+    environment:
+      APP_DB_NAME: png
+      APP_DB_USER: png
+      APP_DB_PASS: png
 
   mysql:
     build: ./bin/mysql
@@ -25,6 +29,7 @@ services:
       - "3306:3306"
     volumes:
       - ${MYSQL_LOG_DIR-./logs/mysql}:/var/log/mysql
+      - ./data/mysql_init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       MYSQL_ROOT_PASSWORD: tiger
       MYSQL_DATABASE: png
